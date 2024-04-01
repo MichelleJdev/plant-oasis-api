@@ -79,7 +79,9 @@ const getUserCart = async (req, res) => {
 const getCartDetails = async (req, res) => {
   const cart = req.body.cartItems;
   const productIds = getObjectIds(cart);
-  const foundProducts = await Product.find({ _id: { $in: productIds } });
+  const foundProducts = await Product.find({
+    _id: { $in: productIds },
+  }).populate("category");
   res.status(200).json({ cartDetails: foundProducts });
 };
 
