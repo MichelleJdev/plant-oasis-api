@@ -1,6 +1,6 @@
 const stripe = require("../config/stripe.config");
 const AppError = require("../utils/AppError");
-const webhookSecret = process.env.WEBHOOK_SECRET;
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
 
 const verifyStripe = (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ const verifyStripe = (req, res, next) => {
     const event = stripe.webhooks.constructEvent(
       req.body,
       stripeSignature,
-      webhookSecret
+      STRIPE_WEBHOOK_SECRET
     );
     req.event = event;
     next();
