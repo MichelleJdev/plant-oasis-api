@@ -81,7 +81,8 @@ const handleLogin = async (req, res, next) => {
   res.status(200).json({
     accessToken,
     name: foundUser.name,
-    email: foundUser.email,
+    emailAddress: foundUser.email,
+    favourites: foundUser.favourites,
   });
 };
 
@@ -106,9 +107,9 @@ const handleRefresh = async (req, res, next) => {
       );
       res.status(200).json({
         accessToken: newAccessToken,
-        isAdmin: foundUser.isAdmin,
         name: foundUser.name,
-        email: foundUser.email,
+        emailAddress: foundUser.email,
+        favourites: foundUser.favourites,
       });
     } catch (error) {
       next(error);
